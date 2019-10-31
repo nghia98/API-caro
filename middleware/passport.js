@@ -17,7 +17,7 @@ passport.use(new LocalStrategy({
         User.findOneEmail(email)
            .then(user => {
                if (!user) {
-                   return cb(null, false, {message: 'Incorrect email or password.'});
+                   return cb(null, false, {message: 'Email hoặc Mật khẩu không chính xác !'});
                }
 
                bcrypt.compare(password, user.password, (err, result) => {
@@ -26,10 +26,10 @@ passport.use(new LocalStrategy({
                     }
 
                     if(!result){
-                        return cb(null, false, {message: 'Incorrect password'})
+                        return cb(null, false, {message: 'Mật khẩu không chính xác !'})
                     }
 
-                    return cb(null, user, {message: 'Logged In Successfully'});
+                    return cb(null, user, {message: 'Đăng nhập thành công !'});
                })
           })
           .catch(err => cb(err));
