@@ -18,7 +18,7 @@ router.post('/register',function (req, res) {
   User.findOneEmail(entity.email)
   .then(user => {
     if (user){
-      return res.json({error: 'Email alreadly exists'});
+      return res.status(400).json({message: 'Địa chỉ Email đã tồn tại !'});
     }
 
     bcrypt.hash(entity.password, 5, (err, passHash) => {
@@ -35,7 +35,7 @@ router.post('/register',function (req, res) {
         }
 
         return res.json({
-          message: 'Created a new account',
+          message: 'Đăng kí tài khoản thành công !',
           user : info
         })
       })
